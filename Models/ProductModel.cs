@@ -19,5 +19,6 @@ namespace WebApp01.Models
 
         public CategoryModel Category { get; set; }
         public BrandModel Brand { get; set; }
+        public string Image { get; set; }
     }
 }
