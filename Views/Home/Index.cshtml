@@ -1,4 +1,5 @@
-﻿<div class="col-sm-3">
+﻿@model IEnumerable<ProductModel>
+<div class="col-sm-3">
 	@Html.Partial("_SidebarPartial")
 </div>
 
@@ -6,19 +7,24 @@
 	<div class="features_items">
 		<!--features_items-->
 		<h2 class="title text-center">Features Items</h2>
+		@foreach(var item in Model){
 		<div class="col-sm-4">
 			<div class="product-image-wrapper">
 				<div class="single-products">
 					<div class="productinfo text-center">
-						<img src="images/home/product1.jpg" alt="" />
-						<h2>$56</h2>
-						<p>Easy Polo Black Edition</p>
+						<img src="~/images/@item.Image" alt="@item.Name" width="50%" />
+						<h2>@item.Name</h2>
+						<p><strong>Giá</strong> @item.Price</p>
+						<p><strong>Loại</strong> @item.Category.Name</p>
+						<p><strong>@item.Brand.Name</strong> </p>
 						<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 					</div>
 					<div class="product-overlay">
 						<div class="overlay-content">
-							<h2>$56</h2>
-							<p>Easy Polo Black Edition</p>
+							<h2>@item.Name</h2>
+							<p><strong>Loại</strong> @item.Category.Name</p>
+							<p><strong>@item.Brand.Name</strong> </p>
+							<p>@item.Price</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 						</div>
 					</div>
@@ -31,6 +37,7 @@
 				</div>
 			</div>
 		</div>
+		}
 		@*<div class="col-sm-4">
 			<div class="product-image-wrapper">
 				<div class="single-products">
