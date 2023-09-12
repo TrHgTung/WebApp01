@@ -43,6 +43,8 @@ namespace WebApp01.Controllers
                 cartItems.Quantity += 1;
             }
             HttpContext.Session.SetJson("Cart", cart);
+
+            TempData["success"] = "Đã thêm thành công";
 			return Redirect(Request.Headers["Referer"].ToString());
         }
         
@@ -66,7 +68,8 @@ namespace WebApp01.Controllers
 				HttpContext.Session.SetJson("Cart", cart);
 				// thiet lap  cart mới
 			}
-			return RedirectToAction("Index");
+            TempData["success"] = "Đã giảm 1 đơn vị";
+            return RedirectToAction("Index");
         }
 
 		public async Task<IActionResult> Increase(int Id)
@@ -90,7 +93,8 @@ namespace WebApp01.Controllers
 				HttpContext.Session.SetJson("Cart", cart);
 				// thiet lap  cart mới
 			}
-			return RedirectToAction("Index");
+            TempData["success"] = "Đã tăng 1 đơn vị";
+            return RedirectToAction("Index");
 		}
 
         public async Task<IActionResult> Remove(int Id)
@@ -105,12 +109,15 @@ namespace WebApp01.Controllers
             {
 				HttpContext.Session.SetJson("Cart", cart);
 			}
+            TempData["success"] = "Đã xóa thành công";
             return RedirectToAction("Index");
 		}
 
         public async Task<IActionResult> Clear(int Id) // hủy hoàn toàn cart
         {
 			HttpContext.Session.Remove("Cart");
+            TempData["success"] = "Đã xóa thành công";
+
             return RedirectToAction("Index");
 		}
 	}
