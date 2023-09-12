@@ -13,21 +13,14 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="~/images/@item.Image" alt="@item.Name" width="50%" />
-							<h2>@item.Name</h2>
-							<p><strong>Giá</strong> @item.Price</p>
-							<p><strong>Loại</strong> @item.Category.Name</p>
-							<p><strong>@item.Brand.Name</strong> </p>
-							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-						</div>
-						<div class="product-overlay">
-							<div class="overlay-content">
+							<a asp-action="Details" asp-controller="Product" asp-route-Id="@item.Id">
+								<img src="~/images/@item.Image" alt="@item.Name" width="50%" />
 								<h2>@item.Name</h2>
+								<p><strong>Giá</strong> @item.Price</p>
 								<p><strong>Loại</strong> @item.Category.Name</p>
-								<p><strong>@item.Brand.Name</strong></p>
-								<p>@item.Price</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
+								<p><strong>@item.Brand.Name</strong> </p>
+							</a>
+							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 						</div>
 					</div>
 					<div class="choose">

@@ -37,12 +37,12 @@
 									<p>@item.Price VND</p>
 								</td>
 								<td class="cart_quantity">
-									<div class="cart_quantity_button">
-										<a class="btn btn-primary btn-sm" asp-action="Increase" asp-route-id="@item.ProductId" asp-controller="Cart"> + </a>
+									@*<div class="cart_quantity_button">*@
+										<a class="btn btn-primary btn-sm" asp-controller="Cart" asp-action="Increase" asp-route-id="@item.ProductId" > + </a>
 										<input class="cart_quantity_input" type="text" name="quantity" value="@item.Quantity" autocomplete="off" size="2">
-										<a class="btn btn-primary btn-sm" asp-action="Decrease" asp-route-id="@item.ProductId" asp-controller="Cart"> - </a>
-										<a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProductId" asp-controller="Cart"> Xóa SP </a>
-									</div>
+										<a class="btn btn-primary btn-sm" asp-controller="Cart" asp-action="Decrease" asp-route-id="@item.ProductId" > - </a>
+										<a class="btn btn-danger btn-sm" asp-controller="Cart" asp-action="Remove" asp-route-id="@item.ProductId" > Xóa SP </a>
+									@*</div>*@
 								</td>
 								<td class="cart_total">
 									<p class="cart_total_price">@Model.CartItems.Where(x => x.ProductId == @item.ProductId).Sum(x => x.Quantity * x.Price).ToString() VND</p>
@@ -53,7 +53,7 @@
 							</tr>
 						}
 						<tr>
-							<td colspan="6">Tổng cộng: @Model.GrandTotal.ToString()</td>
+							<td colspan="6">Tổng cộng: <p class="cart_total_price">@Model.GrandTotal.ToString()</p></td>
 						</tr>
 					}
 					else
