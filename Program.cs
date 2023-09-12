@@ -37,9 +37,14 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
+app.MapControllerRoute( // Home route ("/") cua trang chinh
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute( // Home Route ("/") cua trang admin
+    name: "Areas",
+    pattern: "{area:exists}/{controller=Product}/{action=Index}/{id?}");
+
 // seeding data
 var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
 SeedData.SeedingData(context);
