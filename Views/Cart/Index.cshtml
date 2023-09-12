@@ -1,6 +1,70 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    <p> Day la trang Cart</p>
-}
+﻿@using WebApp01.Models.ViewModels;
+@model CartItemViewModel
+<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+					@if (Model.CartItems.Count > 0)
+					{
+						@foreach (var item in Model.CartItems)
+						{
+							<tr>
+								<td class="cart_product">
+									<a href=""><img src="~/images/@item.Image" alt=""></a>
+								</td>
+								<td class="cart_description">
+									<h4><a href="">@item.ProductName </a></h4>
+									@*<p>Web ID: 1089772</p>*@
+								</td>
+								<td class="cart_price">
+									<p>@item.Price VND</p>
+								</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
+										<a class="btn btn-primary btn-sm" asp-action="Increase" asp-route-id="@item.ProductId" asp-controller="Cart"> + </a>
+										<input class="cart_quantity_input" type="text" name="quantity" value="@item.Quantity" autocomplete="off" size="2">
+										<a class="btn btn-primary btn-sm" asp-action="Decrease" asp-route-id="@item.ProductId" asp-controller="Cart"> - </a>
+										<a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProductId" asp-controller="Cart"> Xóa SP </a>
+									</div>
+								</td>
+								<td class="cart_total">
+									<p class="cart_total_price">@Model.CartItems.Where(x => x.ProductId == @item.ProductId).Sum(x => x.Quantity * x.Price).ToString() VND</p>
+								</td>
+								<td class="cart_delete">
+									<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								</td>
+							</tr>
+						}
+						<tr>
+							<td colspan="6">Tổng cộng: @Model.GrandTotal.ToString()</td>
+						</tr>
+					}
+					else
+					{
+						<tr>
+							<td colspan="5"><strong>Không có gì trong giỏ hàng cả</strong></td>
+						</tr>
+						<p>Hãy quay lại và xem qua vài sản phẩm nhé</p>
+					}
+				</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
