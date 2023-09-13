@@ -27,11 +27,11 @@ namespace WebApp01.Areas.Admin.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> Create(ProductModel product)
-        //{
-        //    ViewBag.Categories = new SelectList(_dataContext.Categories, "Id", "Name", product.CategoryId);
-        //    ViewBag.Brands = new SelectList(_dataContext.Brands, "Id", "Name", product.BrandId);
-        //    return View(product);
-        //}
+        public async Task<IActionResult> CreateProduct(ProductModel product)
+        {
+            ViewBag.Categories = new SelectList(_dataContext.Categories, "Id", "Name", product.CategoryId);
+            ViewBag.Brands = new SelectList(_dataContext.Brands, "Id", "Name", product.BrandId);
+            return View(product);
+        }
     }
 }
