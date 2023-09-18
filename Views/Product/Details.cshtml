@@ -7,8 +7,8 @@
         <div class="product-details"><!--product-details-->
             <div class="col-sm-5">
                 <div class="view-product">
-                    <img src="~/images/@Model.Image" alt="" />
-                    <h3>ZOOM</h3>
+                    <img src="~/images/products/@Model.Image" alt="" />
+                    <h3>HOT</h3>
                 </div>
                 <div id="similar-product" class="carousel slide" data-ride="carousel">
                     
@@ -47,21 +47,20 @@
                     @*<img src="~/images/@Model.Image" class="newarrival" alt="@Model.Name" />*@
                     <h2>@Model.Name</h2>
                     
-                    @*<img src="~/images/@Model.Image" alt="" />*@
+                    @*<img src="~/images/products/@Model.Image" alt="" />*@
                     <span>
                         <span>@Model.Price VND</span>
                         <label>Quantity: 1</label>
                         <input type="text" value="3" />
-                        <button type="button" class="btn btn-fefault cart">
-                            <i class="fa fa-shopping-cart"></i>
-                            Add to cart
-                        </button>
+                        
+                        <a asp-action="Add" asp-controller="Cart" asp-route-Id="@Model.Id" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        
                     </span>
                     <p><b>Availability:</b> In Stock</p>
                     <p><b>Condition:</b> New</p>
                     <p><b>Brand:</b> @Model.Brand.Name</p>
                     <p><b>Category:</b> @Model.Category.Name</p>
-                    <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+                    @*<a href="">Share</a>*@
                 </div><!--/product-information-->
             </div>
         </div><!--/product-details-->
