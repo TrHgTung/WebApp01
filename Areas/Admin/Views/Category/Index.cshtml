@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CategoryModel>
+@{
+    ViewData["title"] = "Hiển thị danh mục";
+}
+<h4>Danh sách danh mục</h4>
+<a asp-action="Create" asp-controller="Category">Thêm danh mục mới</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên danh mục</th>
+            <th scope="col">Giới thiệu danh mục</th>
+            <th scope="col">Product Slug</th>
+            <th scope="col">Trạng thái (danh mục)</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.Name</td>
+                <td>@Html.Raw(@item.Description)</td>
+                
+                <td>@item.Slug</td>
+              
+                <td>
+                    <a asp-action="Edit" asp-controller="Category" asp-route-Id="@item.Id" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Delete" asp-controller="Category" asp-route-Id="@item.Id" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
