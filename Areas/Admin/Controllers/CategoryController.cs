@@ -66,6 +66,53 @@ namespace WebApp01.Areas.Admin.Controllers
             return View(category);
         }
 
+        public async Task<IActionResult> Edit(int Id)
+        {
+            CategoryModel category = await _dataContext.Categories.FindAsync(Id);
+            return View(category);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> Edit(CategoryModel category)
+        {
+
+            if (ModelState.IsValid) // neu du lieu nhập vào đúng với Model
+            {
+                // them du lieu
+                //TempData["success"] = "OK";
+                category.Slug = category.Name.Replace(" ", "-");
+                var slug = await _dataContext.Categories.FirstOrDefaultAsync(p => p.Slug == category.Slug);
+                if (slug != null)
+                {
+                    ModelState.AddModelError("", "Danh mục đã có sẵn");
+                    return View(category);
+                }
+
+                _dataContext.Update(category);
+                await _dataContext.SaveChangesAsync();
+                TempData["success"] = "Đã cập nhật thành công";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["error"] = "Có lỗi xảy ra";
+                List<string> errors = new List<string>();
+                foreach (var value in ModelState.Values)
+                {
+                    foreach (var error in value.Errors)
+                    {
+                        errors.Add(error.ErrorMessage);
+                    }
+                }
+                string errorMessage = string.Join("\n", errors);
+                return BadRequest(errorMessage);
+            }
+
+            return View(category);
+        }
+
         public async Task<IActionResult> Delete(int Id)
         {
             CategoryModel category = await _dataContext.Categories.FindAsync(Id);
@@ -75,5 +122,7 @@ namespace WebApp01.Areas.Admin.Controllers
             TempData["error"] = "Đã xóa danh mục";
             return RedirectToAction("Index");
         }
+
+      
     }
 }

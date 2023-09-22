@@ -10,7 +10,7 @@
             <th scope="col">STT</th>
             <th scope="col">Tên danh mục</th>
             <th scope="col">Giới thiệu danh mục</th>
-            <th scope="col">Product Slug</th>
+            <th scope="col">Slug</th>
             <th scope="col">Trạng thái (danh mục)</th>
             
         </tr>
@@ -24,6 +24,16 @@
                 <td>@Html.Raw(@item.Description)</td>
                 
                 <td>@item.Slug</td>
+                <td>
+                    @if(@item.Status == 1)
+                    {
+                        <span class="text-area text-success">Đang hiển thị</span>
+                    }
+                    else
+                    {
+                        <span class="text-area text-success">Đang ẩn</span>
+                    }
+                </td>
               
                 <td>
                     <a asp-action="Edit" asp-controller="Category" asp-route-Id="@item.Id" class="btn btn-warning btn-sm">Sửa</a>
