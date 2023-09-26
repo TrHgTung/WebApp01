@@ -42,7 +42,17 @@ app.MapControllerRoute( // Home Route ("/") cua trang admin
     name: "Areas",
     pattern: "{area:exists}/{controller=Product}/{action=Index}/{id?}");
 
-app.MapControllerRoute( // Home route ("/") cua trang chinh
+app.MapControllerRoute( // Brand Route
+    name: "Brand",
+    pattern: "/Brand/{Slug?}",
+    defaults: new { controller = "Brand", action = "Index" });
+
+app.MapControllerRoute( // Category Route
+    name: "Category",
+    pattern: "/Category/{Slug?}",
+    defaults: new {controller="Category",action="Index"});
+
+app.MapControllerRoute( // Route default; cac route khac phai nam o tren default
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
