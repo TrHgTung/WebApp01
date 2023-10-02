@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WebApp01.Models;
 using WebApp01.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,25 +20,42 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddIdentity<AppUserModel,IdentityRole>().AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Password settings.
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 4;
+
+    options.User.RequireUniqueEmail = true;
+});
+
 var app = builder.Build();
 
+app.UseStatusCodePagesWithRedirects("/Home/Error?statuscode={0}");
+
 app.UseSession();
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    //app.UseHsts();
 }
-
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+
 app.UseRouting();
+//app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.MapControllerRoute( // Home Route ("/") cua trang admin
     name: "Areas",
