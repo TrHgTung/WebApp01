@@ -90,11 +90,24 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a asp-controller="Account"><i class="fa fa-lock"></i> Login</a></li>
+								@if(User.Identity?.IsAuthenticated ?? false)
+								{
+									<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+									<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+
+@*									<li><a asp-controller="Account"><i class="fa fa-lock"></i> Xin chào, @User.Identity.Name </a></li>
+*@									<li class="dropdown">
+										<a href="#"><i class="fa fa-lock"></i>Xin chào, @User.Identity.Name </a>
+										<ul class="sub-menu">
+											<li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-lock"></i> Đăng xuất </a></li>
+										</ul>
+									</li>
+								}
+								else
+								{
+									<li><a asp-controller="Account" asp-action="Login"><i class="fa fa-lock"></i> Đăng nhập </a></li>
+								}
+
 							</ul>
 						</div>
 					</div>
@@ -125,7 +138,6 @@
 										<li><a asp-action="Details" asp-controller="Product">Products Details</a></li>
 										<li><a asp-action="Checkout" asp-controller="Cart">Checkout</a></li>
 										<li><a asp-action="Index" asp-controller="Cart">Cart</a></li>
-										<li><a >Login</a></li>
 									</ul>
 								</li>
 								<li class="dropdown">

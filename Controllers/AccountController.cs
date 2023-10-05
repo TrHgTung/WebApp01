@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApp01.Models;
+using WebApp01.Models.ViewModels;
 
 namespace WebApp01.Controllers
 {
@@ -13,19 +14,31 @@ namespace WebApp01.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public IActionResult Login(string returnUrl)
         {
-            return View();
-        }  
+            return View(new LoginViewModel { ReturnUrl = returnUrl });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel loginVM)
+        {
+            if (ModelState.IsValid)
+            {
+                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(loginVM.Username, loginVM.Password, false, false);
+                if (result.Succeeded)
+                {
+                    return Redirect(loginVM.ReturnUrl ?? "/"); // success -> url ; false -> return index (login)
+                }
+                ModelState.AddModelError("", "Sai thông tin đăng nhập");
+            }
+            return View(loginVM);
+        }
+        
         public IActionResult Create()
         {
             return View();
         }
 
-        public async Task<IActionResult> Login()
-        {
-            return View();
-        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UserModel user)
@@ -33,11 +46,11 @@ namespace WebApp01.Controllers
             if(ModelState.IsValid)
             {
                 AppUserModel newUser = new AppUserModel { UserName = user.Username, Email = user.Email };
-                IdentityResult result = await _userManager.CreateAsync(newUser);
+                IdentityResult result = await _userManager.CreateAsync(newUser,user.Password);
                 if (result.Succeeded)
                 {
                     TempData["success"] = "Tạo tài khoản thành công";
-                    return Redirect("/account");
+                    return Redirect("/account/login");
                 } 
                 foreach(IdentityError error in result.Errors)
                 {
@@ -45,6 +58,13 @@ namespace WebApp01.Controllers
                 }
             }
             return View(user);
+        }
+
+        public async Task<IActionResult> Logout(string returnUrl = "/")
+        {
+            await _signInManager.SignOutAsync();
+
+            return Redirect(returnUrl);
         }
     }
 }
