@@ -92,8 +92,8 @@
 							<ul class="nav navbar-nav">
 								@if(User.Identity?.IsAuthenticated ?? false)
 								{
-									<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-									<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+									@*<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>*@
+									<li><a asp-controller="Cart" asp-action="Index"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 
 @*									<li><a asp-controller="Account"><i class="fa fa-lock"></i> Xin chào, @User.Identity.Name </a></li>
 *@									<li class="dropdown">
