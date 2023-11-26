@@ -25,6 +25,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="wwwroot\Admin\css\" />
     <Folder Include="wwwroot\Admin\images\" />
+    <Folder Include="wwwroot\images\assets\" />
   </ItemGroup>
 
 </Project>
