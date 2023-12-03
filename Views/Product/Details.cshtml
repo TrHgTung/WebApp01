@@ -51,9 +51,9 @@
                     <span>
                         <span>@Model.Price VND</span>
                         <label>Quantity: 1</label>
-                        <input type="text" value="3" />
+                        @*<input type="text" value="3" />*@
                         
-                        <a asp-action="Add" asp-controller="Cart" asp-route-Id="@Model.Id" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <a asp-action="Add" asp-controller="Cart" asp-route-Id="@Model.Id" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add 1 item to cart</a>
                         
                     </span>
                     <p><b>Availability:</b> In Stock</p>

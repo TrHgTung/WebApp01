@@ -130,15 +130,15 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a asp-controller="Home" asp-action="" class="active">Home</a></li>
+								<li><a asp-controller="Home" asp-action="" class="active">Trang chủ</a></li>
 								<li class="dropdown">
-									<a asp-controller="Product" asp-action="Index">Shop<i class="fa fa-angle-down"></i></a>
-									<ul role="menu" class="sub-menu">
+									<a asp-controller="Cart" asp-action="Index">Giỏ hàng<i class="fa fa-angle-down"></i></a>
+									@*<ul role="menu" class="sub-menu">
 										<li><a asp-action="Index" asp-controller="Category">Category</a></li>
 										<li><a asp-action="Details" asp-controller="Product">Products Details</a></li>
 										<li><a asp-action="Checkout" asp-controller="Cart">Checkout</a></li>
 										<li><a asp-action="Index" asp-controller="Cart">Cart</a></li>
-									</ul>
+									</ul>*@
 								</li>
 								@*<li class="dropdown">
 									<a href="#">Blog<i class="fa fa-angle-down"></i></a>
@@ -148,7 +148,7 @@
 									</ul>
 								</li>*@
 								@*<li><a href="404.html">404</a></li>*@
-								<li><a asp-controller="Home" asp-action="Privacy">About us</a></li>
+								<li><a asp-controller="Home" asp-action="Privacy">Giới thiệu</a></li>
 							</ul>
 						</div>
 					</div>
