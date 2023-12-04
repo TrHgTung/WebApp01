@@ -16,6 +16,11 @@ namespace WebApp01.Controllers
             return View();
         }
 
+        public IActionResult Payment()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CheckoutModel checkout)
@@ -25,7 +30,8 @@ namespace WebApp01.Controllers
                 _dataContext.Add(checkout);
                 await _dataContext.SaveChangesAsync();
                 TempData["success"] = "Đã thêm thành công";
-                return RedirectToAction("Create");
+                return RedirectToAction("Payment");
+                //return View(payment);
             }
             else
             {

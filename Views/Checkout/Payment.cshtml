@@ -1,7 +1,43 @@
-﻿@model CheckoutModel
+﻿
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    <h1>This is payment page!</h1>
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Thanh toán</h1>
+        <p class="lead">Bạn có thể đặt ship COD hoặc thanh toán trực tuyến.</p>
+    </div>
+    <div class="container">
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 box-shadow">
+                
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">Ship COD <small class="text-muted"></small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Ship dưới 20km miễn phí</li>
+                        <li>Ship từ 20 - 100km phí 30,000 VND/đơn hàng</li>
+                        <li>Ship trên 100km: 5,000 VND/mỗi km/một đơn hàng</li>
+                        <li>Giao trong vòng 7 ngày</li>
+                    </ul>
+                    <a asp-controller="Payment" asp-action="ShipCod"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Ship COD</button></a>
+                </div>
+            </div>
+           <div class="mt-4 mb-5">
+                <div class="card mb-4 box-shadow">
+
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Thanh toán MoMo <small class="text-muted"></small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Không thêm phí</li>
+
+                        </ul>
+                        <a asp-action="MoMo" asp-controller="Payment"><button type="button" class="btn btn-lg btn-block btn-primary">MoMo</button></a>
+                    </div>
+                </div>
+           </div>
+            
+        </div>
+
+      
+    </div>
 }
