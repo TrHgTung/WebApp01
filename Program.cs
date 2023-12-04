@@ -34,7 +34,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
     options.Password.RequiredLength = 4;
-
+    //options.SignIn.RequireConfirmedAccount = false;
     options.User.RequireUniqueEmail = true;
 });
 
@@ -87,7 +87,7 @@ SeedData.SeedingData(context);
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var roles = new[] { "Admin", "Customer" };
+    var roles = new[] { "Customer", "Admin" };
 
     foreach (var role in roles)
     {
@@ -97,5 +97,24 @@ using (var scope = app.Services.CreateScope())
         }
     }
 }
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    UserManager<IdentityUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+//    string Email = "admin@mail.com";
+//    string Password = "Test@123";
+//    if(await userManager.FindByEmailAsync(Email) == null)
+//    {
+//        var user = new IdentityUser();
+//        user.UserName = Email;
+//        user.Email = Email;
+
+//        await userManager.CreateAsync(user, Password);
+
+//        await userManager.AddToRoleAsync(user, "Customer");
+//    }
+
+//}
 
 app.Run();

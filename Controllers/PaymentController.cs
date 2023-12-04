@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace WebApp01.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class PaymentController : Controller
     {
         public IActionResult ShipCod()
@@ -9,9 +12,9 @@ namespace WebApp01.Controllers
             return View();
         }
         
-        public IActionResult MoMo()
-        {
-            return View();
-        }
+        //public IActionResult MoMo()
+        //{
+        //    return View();
+        //}
     }
 }

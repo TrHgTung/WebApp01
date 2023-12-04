@@ -3,9 +3,12 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using WebApp01.Repository;
 using WebApp01.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace WebApp01.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class MailController : Controller
     {
         private readonly DataContext _dataContext;
@@ -35,10 +38,12 @@ namespace WebApp01.Controllers
                 {
                     client.Connect("smtp.gmail.com");
                     client.Authenticate("tungng14@gmail.com", "dyuxzvyzweayjiga");
-
+                    var mailContent = TempData["mailContent"];
+                    ViewBag.Mail = mailContent;
                     var bodyBuilder = new BodyBuilder
                     {
-                        HtmlBody = "<p>Thank you for using our service</p>",
+                       
+                        HtmlBody = "<p> San pham cua ban se duoc gui toi dia chi " + mailContent+" trong vong 7 ngay ke tiep. Xin chan thanh cam on!</p>",
                         TextBody = "Thank you so much"
                     };
                     var message = new MimeMessage

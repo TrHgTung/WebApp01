@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using WebApp01.Models;
 using WebApp01.Repository;
 
 namespace WebApp01.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class CheckoutController : Controller
     {
         private readonly DataContext _dataContext;
@@ -40,6 +43,12 @@ namespace WebApp01.Controllers
                 string errorMessage = string.Join("\n", errors);
                 return BadRequest(errorMessage);
             }
+        }
+
+        public IActionResult PassDataToMail(CheckoutModel checkout)
+        {
+            TempData["mailContent"] = checkout.Address.ToString();
+            return RedirectToAction("Contact", "Mail");
         }
     }
 }
