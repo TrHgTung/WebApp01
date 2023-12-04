@@ -1,6 +1,14 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model MailModel
 @{
-    <p>COD Successfully!</p>
+    <h2>Cảm ơn bạn đã sử dụng dịch vụ! Sản phẩm sẽ đến nơi trong vòng 7 ngày.</h2>
+    <h4>Nếu cần xác nhận bằng e-mail, hãy nhập địa chỉ e-mail của bạn, chúng tôi sẽ gửi thông tin mua hàng</h4>
+    <form asp-action="Contact" asp-controller="Mail" enctype="multipart/form-data">
+     
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label>Nhập địa chỉ e-mail: </label><input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger" />
+        </div>
+        <button>Gửi mail</button>
+</form>
 }
