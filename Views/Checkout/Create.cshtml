@@ -1,0 +1,33 @@
+﻿@model CheckoutModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <h3> Nhập thông tin giao hàng </h3>
+    <p>Sau khi nhập những thông tin cần thiết phía dưới, chúng tôi sẽ giao hàng cho bạn:</p>
+    <form asp-action="Create" asp-controller="Checkout" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @*<div class="form-group">
+            <label>Nhập ID: </label><input asp-for="Id" class="form-control" />
+            <span asp-validation-for="Id" class="text-danger" />
+        </div>
+        *@
+        <div class="form-group">
+            <label>Nhập địa chỉ: </label><input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Tên thành phố: </label><input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Số điện thoại người nhận: </label><input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Ghi chú thêm cho chúng tôi: </label><input asp-for="Note" class="form-control" />
+            <span asp-validation-for="Note" class="text-danger" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+}
