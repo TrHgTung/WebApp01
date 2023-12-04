@@ -22,7 +22,7 @@ namespace WebApp01.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Contact(MailModel mail)
+        public async Task<IActionResult> Contact(MailModel mail, string Email)
         {
             if (!ModelState.IsValid)
             {
@@ -45,9 +45,9 @@ namespace WebApp01.Controllers
                     {
                         Body = bodyBuilder.ToMessageBody()
                     };
-                    message.From.Add(new MailboxAddress("Noreply my site", "tungng14@gmail.com"));
-                    message.To.Add(new MailboxAddress("Result", "nguyentuanhungtuyam@gmail.com"));
-                    message.Subject = "New contact submitted";
+                    message.From.Add(new MailboxAddress("Shop", "tungng14@gmail.com"));
+                    message.To.Add(new MailboxAddress("Customer", Email));
+                    message.Subject = "Ban da chon hinh thuc ship COD";
                     client.Send(message);
 
                     client.Disconnect(true);
