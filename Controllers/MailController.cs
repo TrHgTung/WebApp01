@@ -20,15 +20,42 @@ namespace WebApp01.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+        //public IActionResult Index(int productId)
+        //{
+        //    List<CartItemModel> cart = HttpContext.Session.GetJson<List<CartItemModel>>("Cart");
+        //    cart.RemoveAll(p => p.ProductId == productId);
+        //    //cart.RemoveAll(p => p.ProductId == productId);
+        //    //if (cart.Count == 0)
+        //    //{
+        //    //    HttpContext.Session.Remove("Cart");
+        //    //}
+        //    //else
+        //    //{
+        //    //    HttpContext.Session.SetJson("Cart", cart);
+        //    //}
+        //    //TempData["success"] = "Đã xóa thành công";
+        //    return View(cart);
+        //}
+
+        //public IActionResult AutoClearCart() // hủy hoàn toàn cart
+        //{
+            
+        //    //TempData["success"] = "Đã xóa thành công";
+
+        //    return RedirectToAction("Index");
+        //}
+
         public IActionResult Index()
         {
-            return View();
+           return View();
         }
+
         [HttpPost]
-        public async Task<IActionResult> Contact(MailModel mail, string Email)
+        public async Task<IActionResult> Contact(MailModel mail, string Email, int productId)
         {
             if (!ModelState.IsValid)
             {
+                HttpContext.Session.Clear(); // clear cart -- neu ko tra dc ve view Index thi xoa dong nay
                 return View();
             }
             
@@ -61,6 +88,8 @@ namespace WebApp01.Controllers
                 _dataContext.Add(mail);
                 await _dataContext.SaveChangesAsync();
                 TempData["success"] = "Đã gửi mail thành công về địa chỉ e-mail của bạn";
+                HttpContext.Session.Clear(); // clear cart -- neu ko tra dc ve view Index thi xoa dong nay
+
                 return RedirectToAction("Index");
             }
         }
